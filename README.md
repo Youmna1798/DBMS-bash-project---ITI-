@@ -1,6 +1,5 @@
 # DBMS_Bashscript-project
 
-## [Project Demo](Bash_DBMS_Demo.mp4)
 
 Bash Shell Script Database Management System (DBMS):
 
