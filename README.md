@@ -41,7 +41,7 @@ the main project file
 ### Yomna Muhammed Samy
 [Github](https://github.com/Youmna1798)
 
-[Linked in](https://www.linkedin.com/in/youmna-samy
+[Linked in](https://www.linkedin.com/in/youmna-samy)
 
 ### Nehal Muhammed Hassan
 [Github](https://github.com/nehalhd)
