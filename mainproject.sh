@@ -426,7 +426,7 @@ Delete_Record()
     echo  "________"
 
     read -p "Please, Enter Table Name you wanna Delete from:" tbName
-            
+            https://github.com/Youmna1798/DBMS-bash-project---ITI-
     if [[ -f $tbName ]] ; then
 
         colname=`awk -F ":" '{if(NR==1) print $1}' $tbName`;
