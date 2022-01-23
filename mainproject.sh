@@ -343,14 +343,16 @@ Insert()
                                                 do
                                                         tput setaf 7
                                                         read -p "Enter Value for $colname Column: " value 
+                                                   if ! [[ -z $value ]]; then
 
                                                          if ! [[ $value =~ [`cut -d':' -f1 $tbName | grep -x $value`] ]]; then
-                                                          if [[ $coltype = "int" && "$value" = +([0-9]) || $coltype = "string" && "$value" = +([a-zA-Z]) ]];
-                                                        then		
+                                                           if [[ $coltype = "int" && "$value" = +([0-9]) || $coltype = "string" && "$value" = +([a-zA-Z]) ]];
+                                                           then		
                                                                 echo -n  $value":" >> $tbName;
-                                                        fi
-                                                        check=1
-                                                fi	
+                                                           fi
+                                                              check=1
+                                                         fi
+						   fi
                                                 done  
                                         #End of loop                               
                                         fi
@@ -410,20 +412,28 @@ select_from_table(){
 
 
                                 "Select Record" )
-                                        read -p "Enter your pk: " value
+				
+                                         colname=`awk -F ":" '{if(NR==1) print $1}' $tbName`;
+
+                                           read -p "Enter your $colname: " value
 
                                         if [[ -z $value ]] ; then
                                                 tput setaf 1
                                                 echo "Empty Input"
                                                 tput setaf 7
                                                 select_function
-                                        else
+                                           else
                                                 echo "------------------------------------------------------------"
+                                       
+                                           if [[ $value =~ [`cut -d':' -f1 $tbName | grep -x $value`] ]]; then
+            
+                                            rec_no=$(awk 'BEGIN{FS=":"}{if ( $1 == "'$value'" ) print NR}' $tbName)
 
-                                                column -t -s ':' $tbName.type 
-                                                awk -F':' "/$value/" $tbName | cat
+                                            echo $(awk 'BEGIN{FS=":";}{if ( NR == '$rec_no' ) print $0 }' $tbName)
+
                                                 echo "_____________________________________"
                                                 tput setaf 7
+                                           fi 
                                         fi 
                                         ;;
                                 
