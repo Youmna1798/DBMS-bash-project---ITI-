@@ -46,11 +46,27 @@ create_DB ()
 # List databases functions: 
         listDBs ()
         {
-                        read -p "Enter a Database name: " name
+                         read -p "Enter a Database name: " name
+			 
+                         if [[ -z $name  ]];
+                                then 
+                                        tput setaf 1
+                                        echo "Empty Input"
+                                        tput setaf 7
+                                        listDBs
+
+                                elif [[ $name =~ ['!@#$%^&*()_+'] ]];
+                                then
+                                        tput setaf 1 ;
+                                        echo "incorrect input"
+                                        tput setaf 7
+                                        listDBs
+                        else 
                         if [[ -d $name ]]; then
                                 ls $name;
                         else
                                 echo "No database exist"
+                        fi
                         fi
         echo "_______________________________________________________________________________"
         echo "Select again:"
@@ -63,6 +79,21 @@ create_DB ()
         {
                         # check the folder exist or not
                         read -p "Enter A DropDB Name: " name
+                         if [[ -z $name  ]];
+                                then 
+                                        tput setaf 1
+                                        echo "Empty Input"
+                                        tput setaf 7
+                                        dropDB
+
+                                elif [[ $name =~ ['!@#$%^&*()_+'] ]];
+                                then
+                                        tput setaf 1 ;
+                                        echo "incorrect input"
+                                        tput setaf 7
+                                        dropDB
+                                        else
+					
                         if [[ -d database/$name ]]; then
                                 echo "The DB Exists ";
                                 echo "Are you Sure You Want To drop $name Database? y/n"
@@ -80,6 +111,8 @@ create_DB ()
                         else
                                 echo "$name doesn't exist"
                         fi 
+                        fi
+                        
                         
         echo "______________________________________________________________________________"            
         echo "_______________________________________________________________________________"
@@ -92,12 +125,27 @@ create_DB ()
         ConnectDB()
         {
                 read -p "Enter DB name: " name
+                 if [[ -z $name  ]];
+                                then 
+                                        tput setaf 1
+                                        echo "Empty Input"
+                                        tput setaf 7
+                                        ConnectDB
+
+                                elif [[ $name =~ ['!@#$%^&*()_+'] ]];
+                                then
+                                        tput setaf 1 ;
+                                        echo "incorrect input"
+                                        tput setaf 7
+                                        ConnectDB
+                                        else
                         if [[ -d database/$name ]];then
                                 echo "DB exist"
                                 cd database/$name
                         else
                                 echo "Please make a Database first!"
                                 exit;
+                        fi
                         fi
 
         tableMenuSection     # call table menu function:
